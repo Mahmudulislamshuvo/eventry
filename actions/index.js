@@ -1,6 +1,6 @@
 "use server";
 
-import { createUser, loginUser } from "@/db/queries";
+import { createUser, loginUser, updateEventInterest } from "@/db/queries";
 import { redirect } from "next/navigation";
 
 const registerUser = async (formData) => {
@@ -24,4 +24,12 @@ const performLogin = async (formData) => {
   }
 };
 
-export { registerUser, performLogin };
+const addiInterestedEvent = async (eventId, userId) => {
+  try {
+    await updateEventInterest(eventId, userId);
+  } catch (error) {
+    throw new Error("Failed to update interest: " + error?.message);
+  }
+};
+
+export { registerUser, performLogin, addiInterestedEvent };
