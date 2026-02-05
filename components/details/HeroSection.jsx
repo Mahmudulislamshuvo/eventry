@@ -1,6 +1,6 @@
 import Image from "next/image";
 import ActionButtons from "../ActionButtons";
-import formatArrayLength from "@/lib/formatArrayLength";
+import formatArrayLength from "@/utils/formatArrayLength";
 
 const HeroSection = async ({ eventInfo }) => {
   return (

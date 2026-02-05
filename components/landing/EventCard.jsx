@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import ActionButtons from "../ActionButtons";
-import formatArrayLength from "@/lib/formatArrayLength";
+import formatArrayLength from "@/utils/formatArrayLength";
 
 const EventCard = ({ event }) => {
   return (
