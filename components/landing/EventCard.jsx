@@ -15,7 +15,7 @@ const EventCard = ({ event }) => {
       />
 
       <div className="p-3">
-        <Link href={`/details/${event._id}`} className="font-bold text-lg">
+        <Link href={`/details/${event.id}`} className="font-bold text-lg">
           {event.name}
         </Link>
         <p className="text-[#9C9C9C] text-sm mt-1">{event.location}</p>
