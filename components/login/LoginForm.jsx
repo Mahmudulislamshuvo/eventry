@@ -1,13 +1,16 @@
 "use client";
 
 import { performLogin } from "@/actions";
+import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Spinner from "../common/Spinner";
 
 const LoginForm = () => {
   const [error, setError] = useState("");
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const { setAuth } = useAuth();
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -17,6 +20,7 @@ const LoginForm = () => {
       const loggedUser = await performLogin(formData);
 
       if (loggedUser) {
+        setAuth(loggedUser);
         router.push("/");
       }
     } catch (error) {
@@ -59,7 +63,7 @@ const LoginForm = () => {
           type="submit"
           className="btn-primary w-full mt-4 bg-indigo-600 hover:bg-indigo-800"
         >
-          Login
+          Login {loading ? <Spinner size={20} /> : ""}
         </button>
       </form>
     </>

@@ -24,3 +24,9 @@
     @apply border border-black/20 rounded-md px-4 py-2 bg-gray-300 text-black;
   }
 }
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
