@@ -1,8 +1,9 @@
+import { registerUser } from "@/actions";
 import React from "react";
 
 const RegisterForm = () => {
   return (
-    <form className="login-form">
+    <form className="login-form" action={registerUser}>
       {/* <!-- name --> */}
       <div>
         <label htmlFor="name">Full Name</label>
