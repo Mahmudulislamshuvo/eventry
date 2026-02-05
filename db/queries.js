@@ -31,7 +31,11 @@ const loginUser = async (credenTials) => {
     throw new Error("Invalid password");
   }
 
-  return user;
+  if (user) {
+    return replaceMongoIdInObject(user);
+  }
+
+  return null;
 };
 
 export { getAllEvents, getEventById, createUser, loginUser };
