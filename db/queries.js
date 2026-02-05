@@ -5,16 +5,25 @@ import {
   replaceMongoIdInObject,
 } from "@/utils/data-utils";
 import mongoose from "mongoose";
+import { unstable_cache } from "next/cache";
 
-async function getAllEvents() {
-  const allEvents = await eventModel.find().lean();
-  return replaceMongoIdInArray(allEvents);
-}
+const getAllEvents = unstable_cache(
+  async () => {
+    const allEvents = await eventModel.find().lean();
+    return replaceMongoIdInArray(allEvents);
+  },
+  ["all-events"],
+  { tags: ["events"] },
+);
 
-async function getEventById(eventId) {
-  const event = await eventModel.findById(eventId).lean();
-  return replaceMongoIdInObject(event);
-}
+const getEventById = unstable_cache(
+  async (eventId) => {
+    const event = await eventModel.findById(eventId).lean();
+    return replaceMongoIdInObject(event);
+  },
+  ["event-by-id"],
+  { tags: ["events"] },
+);
 
 const createUser = async (userData) => {
   return await userModel.create(userData);
@@ -48,9 +57,9 @@ const updateEventInterest = async (eventId, userId) => {
     );
 
     if (foundUsers) {
-      event.interested_ids.pull(mongoose.Types.ObjectId(userId));
+      event.interested_ids.pull(new mongoose.Types.ObjectId(userId));
     } else {
-      event.interested_ids.push(mongoose.Types.ObjectId(userId));
+      event.interested_ids.push(new mongoose.Types.ObjectId(userId));
     }
 
     await event.save();

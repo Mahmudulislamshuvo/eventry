@@ -1,9 +1,21 @@
-import Link from "next/link";
+"use client";
 
-const ActionButtons = ({ fromDetails }) => {
+import { useAuth } from "@/hooks/useAuth";
+import Link from "next/link";
+import { useState } from "react";
+
+const ActionButtons = ({ eventId, interestedUserIds, fromDetails }) => {
+  const [interested, setInterested] = useState(false);
+  const { auth } = useAuth();
+
+  const isInterested = interestedUserIds?.find((id) => id === auth?.id);
+
   return (
     <div className={`w-full flex gap-4 mt-4 ${fromDetails && "flex-1"}`}>
-      <button className="w-full bg-indigo-600 hover:bg-indigo-800">
+      <button
+        className={`w-full ${isInterested ? "bg-indigo-600" : ""} hover:bg-indigo-800`}
+        onClick={() => setInterested(!interested)}
+      >
         Interested
       </button>
       <Link

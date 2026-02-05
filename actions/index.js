@@ -1,6 +1,7 @@
 "use server";
 
 import { createUser, loginUser, updateEventInterest } from "@/db/queries";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 const registerUser = async (formData) => {
@@ -27,6 +28,9 @@ const performLogin = async (formData) => {
 const addiInterestedEvent = async (eventId, userId) => {
   try {
     await updateEventInterest(eventId, userId);
+    revalidateTag("events");
+
+    // revalidatePath("/");
   } catch (error) {
     throw new Error("Failed to update interest: " + error?.message);
   }
