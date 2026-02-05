@@ -30,6 +30,8 @@ const loginUser = async (credenTials) => {
   if (user.password !== password) {
     throw new Error("Invalid password");
   }
+
+  return user;
 };
 
 export { getAllEvents, getEventById, createUser, loginUser };
