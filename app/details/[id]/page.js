@@ -2,7 +2,7 @@ import EventDetails from "@/components/details/EventDetails";
 import EventVenue from "@/components/details/EventVenue";
 import HeroSection from "@/components/details/HeroSection";
 
-const page = () => {
+const page = ({ params: { id } }) => {
   return (
     <>
       <HeroSection />
