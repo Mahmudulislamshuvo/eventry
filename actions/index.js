@@ -36,4 +36,16 @@ const addiInterestedEvent = async (eventId, userId) => {
   }
 };
 
+const addiGoingEvent = async (eventId, user) => {
+  try {
+    await updateEventGoing(eventId, user);
+    revalidateTag("events");
+  } catch (error) {
+    throw new Error("Failed to update going: " + error?.message);
+  } finally {
+    revalidateTag("events");
+    redirect("/");
+  }
+};
+
 export { registerUser, performLogin, addiInterestedEvent };
