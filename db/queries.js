@@ -53,7 +53,7 @@ const updateEventInterest = async (eventId, userId) => {
 
   if (event) {
     const foundUsers = event.interested_ids.find(
-      (id) => id.toString() === userId,
+      (id) => id?.toString() === userId,
     );
 
     if (foundUsers) {
@@ -66,9 +66,9 @@ const updateEventInterest = async (eventId, userId) => {
   }
 };
 
-const updateEventGoing = async (eventId, user) => {
+const updateEventGoing = async (eventId, userId) => {
   const event = await eventModel.findById(eventId);
-  event.going_ids.push(new mongoose.Types.ObjectId(user?.id));
+  event.going_ids.push(new mongoose.Types.ObjectId(userId));
 
   await event.save();
 };

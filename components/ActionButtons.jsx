@@ -24,7 +24,7 @@ const ActionButtons = ({
 
   const toggleInterest = async () => {
     if (auth) {
-      await addiInterestedEvent(eventId, auth.id);
+      await addiInterestedEvent(eventId, auth?.id);
       setInterested(!interested);
     } else {
       router.push("/login");
