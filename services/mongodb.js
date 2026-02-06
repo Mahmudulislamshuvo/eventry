@@ -2,14 +2,29 @@ import mongoose from "mongoose";
 
 const MONGO_URL = process.env.MONGO_URL;
 
-export const dbConnect = async () => {
-  try {
-    const connection = await mongoose.connect(process.env.MONGO_URL, {
-      dbName: "eventry",
-    });
-    console.log("Mongo Connected successfully");
-    return connection;
-  } catch (error) {
-    console.error("Mongo Connection Error:", error);
+let cached = global.mongoose;
+
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
+
+async function dbConnect() {
+  if (cached.conn) {
+    return cached.conn;
   }
-};
+
+  if (!cached.promise) {
+    const opts = {
+      dbName: "eventry",
+      bufferCommands: false,
+    };
+
+    cached.promise = mongoose.connect(MONGO_URL, opts).then((mongoose) => {
+      return mongoose;
+    });
+  }
+  cached.conn = await cached.promise;
+  return cached.conn;
+}
+
+export default dbConnect;
