@@ -9,6 +9,9 @@ export const generateMetadata = async ({ params: { id } }) => {
   return {
     title: eventInfo.name,
     description: eventInfo.details,
+    openGraph: {
+      images: [eventInfo.imageUrl],
+    },
   };
 };
 
