@@ -8,8 +8,20 @@ import mongoose from "mongoose";
 import { unstable_cache } from "next/cache";
 
 const getAllEvents = unstable_cache(
-  async () => {
-    const allEvents = await eventModel.find().lean();
+  async (query) => {
+    let allEvents = [];
+
+    if (query) {
+      const regex = new RegExp(query, "i");
+      allEvents = await eventModel
+        .find({
+          $or: [{ name: regex }, { details: regex }, { location: regex }],
+        })
+        .lean();
+    } else {
+      allEvents = await eventModel.find().lean();
+    }
+
     return replaceMongoIdInArray(allEvents);
   },
   ["all-events"],
