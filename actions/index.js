@@ -42,13 +42,18 @@ const addiInterestedEvent = async (eventId, userId) => {
 };
 
 const addiGoingEvent = async (eventId, user) => {
+  let isSuccess = false;
+
   try {
     await updateEventGoing(eventId, user);
     revalidateTag("events");
+    isSuccess = true;
   } catch (error) {
+    console.error("Error updating event going:", error);
     throw new Error("Failed to update going: " + error?.message);
-  } finally {
-    revalidateTag("events");
+  }
+
+  if (isSuccess) {
     redirect("/");
   }
 };

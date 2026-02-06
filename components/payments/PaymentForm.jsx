@@ -6,8 +6,13 @@ import { useAuth } from "@/hooks/useAuth";
 const PaymentForm = ({ eventId }) => {
   const { auth } = useAuth();
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await addiGoingEvent(eventId, auth);
+  };
+
   return (
-    <form action={async () => await addiGoingEvent(eventId, auth)}>
+    <form onSubmit={handleSubmit}>
       <div className="my-4 space-y-2">
         <label htmlFor="name" className="block">
           Name
