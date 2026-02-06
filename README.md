@@ -18,7 +18,7 @@ https://github.com/user-attachments/assets/a3fb678a-fea2-4d21-82bc-8db7484959be
 
 _Access the deployed application through the link below._
 
-[**I'll place the link later**]
+[**Eventry**](eventry-kappa.vercel.app)
 
 ---
 
