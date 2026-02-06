@@ -1,7 +1,7 @@
 "use server";
 
 import { createUser, loginUser, updateEventInterest } from "@/db/queries";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 const registerUser = async (formData) => {
