@@ -14,14 +14,6 @@ https://github.com/user-attachments/assets/a3fb678a-fea2-4d21-82bc-8db7484959be
 
 ---
 
-## 🌐 Live URL
-
-_Access the deployed application through the link below._
-
-[**Eventry**](eventry-kappa.vercel.app)
-
----
-
 ## ✨ Features
 
 - **Browse Events:** View a list of upcoming events.
