@@ -66,10 +66,19 @@ const updateEventInterest = async (eventId, userId) => {
   }
 };
 
+const updateEventGoing = async (eventId, userId) => {
+  const event = await eventModel.findById(eventId);
+
+  event.going_ids.push(new mongoose.Types.ObjectId(userId));
+
+  await event.save();
+};
+
 export {
   getAllEvents,
   getEventById,
   createUser,
   loginUser,
   updateEventInterest,
+  updateEventGoing,
 };

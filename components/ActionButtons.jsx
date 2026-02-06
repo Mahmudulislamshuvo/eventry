@@ -23,9 +23,9 @@ const ActionButtons = ({ eventId, interestedUserIds, fromDetails }) => {
 
   const markGoing = () => {
     if (auth) {
-      router.push("/payment");
+      router.push(`/payment/${eventId}`);
     } else {
-      router.push("/login");
+      router.push(`/login`);
     }
   };
 
