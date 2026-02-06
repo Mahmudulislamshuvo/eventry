@@ -1,4 +1,3 @@
-import dbConnect from "@/services/mongodb";
 import { eventModel } from "@/models/eventSchema";
 import { userModel } from "@/models/userSchema";
 import {
@@ -10,7 +9,6 @@ import { unstable_cache } from "next/cache";
 
 const getAllEvents = unstable_cache(
   async (query) => {
-    await dbConnect();
     let allEvents = [];
 
     if (query) {
@@ -32,7 +30,6 @@ const getAllEvents = unstable_cache(
 
 const getEventById = unstable_cache(
   async (eventId) => {
-    await dbConnect();
     const event = await eventModel.findById(eventId).lean();
     return replaceMongoIdInObject(event);
   },
@@ -41,12 +38,10 @@ const getEventById = unstable_cache(
 );
 
 const createUser = async (userData) => {
-  await dbConnect();
   return await userModel.create(userData);
 };
 
 const loginUser = async (credenTials) => {
-  await dbConnect();
   const { email, password } = credenTials;
   const user = await userModel.findOne({ email }).lean();
 
@@ -66,7 +61,6 @@ const loginUser = async (credenTials) => {
 };
 
 const updateEventInterest = async (eventId, userId) => {
-  await dbConnect();
   const event = await eventModel.findById(eventId);
 
   if (event) {
@@ -85,7 +79,6 @@ const updateEventInterest = async (eventId, userId) => {
 };
 
 const updateEventGoing = async (eventId, userId) => {
-  await dbConnect();
   const event = await eventModel.findById(eventId);
   event.going_ids.push(new mongoose.Types.ObjectId(userId));
 
