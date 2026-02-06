@@ -3,6 +3,15 @@ import EventVenue from "@/components/details/EventVenue";
 import HeroSection from "@/components/details/HeroSection";
 import { getEventById } from "@/db/queries";
 
+export const generateMetadata = async ({ params: { id } }) => {
+  const eventInfo = await getEventById(id);
+
+  return {
+    title: eventInfo.name,
+    description: eventInfo.details,
+  };
+};
+
 const EventDetailsPage = async ({ params: { id } }) => {
   const eventInfo = await getEventById(id);
 
