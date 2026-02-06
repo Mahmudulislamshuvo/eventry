@@ -1,6 +1,11 @@
 "use server";
 
-import { createUser, loginUser, updateEventInterest } from "@/db/queries";
+import {
+  createUser,
+  loginUser,
+  updateEventGoing,
+  updateEventInterest,
+} from "@/db/queries";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -48,4 +53,4 @@ const addiGoingEvent = async (eventId, user) => {
   }
 };
 
-export { registerUser, performLogin, addiInterestedEvent };
+export { registerUser, performLogin, addiInterestedEvent, addiGoingEvent };
