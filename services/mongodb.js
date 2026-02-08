@@ -4,7 +4,7 @@ const MONGO_URL = process.env.MONGO_URL;
 
 export const dbConnect = async () => {
   try {
-    const connection = await mongoose.connect(process.env.MONGO_URL, {
+    const connection = await mongoose.connect(MONGO_URL, {
       dbName: "eventry",
     });
     console.log("Mongo Connected successfully");
